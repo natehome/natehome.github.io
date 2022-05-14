@@ -1,22 +1,24 @@
 // get the button and make it respond to a click
 var theButton = document.getElementById("b");
 theButton.onclick = feedTheButton;
+var theMCButton = document.getElementById("megacodeButton");
+theMCButton.onclick = genButtonMC;
 
-// simple function compares two numbers, returns the larger one
-function greatestOfTwo( first, second ) { 
-	if ( first > second ) {
-		return first; 
-   } else {
-		return second; 
-  }
-}
 function intToHex( inputNumber ) { 
-	var hexString = inputNumber.toString(16);
+	var hexString = parseInt(inputNumber, 10).toString(16);
   return hexString.toString();
 }
 function hexToInt( inputHex ) { 
 	var hexString = parseInt(inputHex, 16);
   return hexString.toString();
+}
+function intToBin( inputNumber ) { 
+	var binString = parseInt(inputNumber, 10).toString(2);
+  return binString.toString();
+}
+function binToInt( inputBin ) { 
+	var binString = parseInt(inputBin, 2);
+  return binString.toString();
 }
 function cardInfo( cardInfo, facInfo ) { 
 	var place = document.getElementById("codeInfo");
@@ -60,4 +62,42 @@ function feedTheButton() {
   var place = document.getElementById("write");
   place.innerHTML = result;
   cardInfo(cint+'='+chex,fint+'='+fhex);
+}
+function genUrlMegaCode( keyName, facData, codeData, btnData ) { 
+  keyName = keyName.toString().replace(/\s/g, '');
+  facbin = pad(intToBin(facData.toString().replace(/\s/g, '')),4);
+  codebin = pad(intToBin(codeData.toString().replace(/\s/g, '')),16);
+  btnbin = pad(intToBin(btnData.toString().replace(/\s/g, '')),3);
+  binData = '1'+facbin+codebin+btnbin;
+  hexData = intToHex(binToInt(binData))
+  var kd1 = hexData.slice(0, 2).toUpperCase();
+  var kd2 = hexData.slice(2, 4).toUpperCase();
+  var kd3 = hexData.slice(4, 6).toUpperCase();
+	var returnUrl = '<a href="https://dev.flpr.app/s/#path=subghz/'+keyName+'.sub&Filetype=Flipper+SubGhz+Key+File&Version=1&Frequency=318000000&Preset=FuriHalSubGhzPresetOok650Async&Protocol=MegaCode&Bit=24&Key='+kd1+'+'+kd2+'+'+kd3+'" target="_blank">'+keyName+'.sub</a>';
+  return returnUrl;
+}
+
+function genButtonMC() {
+	var namebox = (document.getElementById("nameboxmc").value);
+	var cint = parseInt(document.getElementById("cboxmc").value);
+  var fint = parseInt(document.getElementById("fboxmc").value);
+  var bint = parseInt(document.getElementById("bboxmc").value);
+  if(cint > 65535 || cint < 0){
+    document.getElementById("write").innerHTML = 'Invalid Code';
+    return;
+  }
+  if(fint > 15 || fint < 0){
+    document.getElementById("write").innerHTML = 'Invalid FAC';
+    return;
+  }
+  if(bint > 7 || bint < 0){
+    document.getElementById("write").innerHTML = 'Invalid Btn';
+    return;
+  }
+
+  //var bhex = intToHex(bint);
+  var result = genUrlMegaCode(namebox, fint, cint, bint);
+  var place = document.getElementById("writeMC");
+  place.innerHTML = result;
+  
 }
