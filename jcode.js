@@ -73,7 +73,7 @@ function genUrlMegaCode( keyName, facData, codeData, btnData ) {
   var kd1 = hexData.slice(0, 2).toUpperCase();
   var kd2 = hexData.slice(2, 4).toUpperCase();
   var kd3 = hexData.slice(4, 6).toUpperCase();
-	var returnUrl = '<a href="https://dev.flpr.app/s/#path=subghz/'+keyName+'.sub&Filetype=Flipper+SubGhz+Key+File&Version=1&Frequency=318000000&Preset=FuriHalSubGhzPresetOok650Async&Protocol=MegaCode&Bit=24&Key='+kd1+'+'+kd2+'+'+kd3+'" target="_blank">'+keyName+'.sub</a>';
+	var returnUrl = '<a href="https://dev.flpr.app/s/#path=subghz/'+keyName+'.sub&Filetype=Flipper+SubGhz+Key+File&Version=1&Frequency=318000000&Preset=FuriHalSubGhzPresetOok650Async&Protocol=MegaCode&Bit=24&Key=00+00+00+00+00+'+kd1+'+'+kd2+'+'+kd3+'" target="_blank">'+keyName+'.sub</a>';
   return returnUrl;
 }
 
