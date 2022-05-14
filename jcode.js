@@ -35,7 +35,7 @@ function genUrlRFID( keyName, keyType, keyData ) {
   var kd1 = keyData.slice(0, 2);
   var kd2 = keyData.slice(2, 4);
   var kd3 = keyData.slice(4, 6);
-	var returnUrl = '<a href="https://dev.flpr.app/s#path=lfrfid/'+keyName+'.rfid&Filetype=Flipper+RFID+key&Version=1&Key+type='+keyType+'&Data='+kd1+'+'+kd2+'+'+kd3+'">'+keyName+'.rfid</a>';
+	var returnUrl = '<a href="https://dev.flpr.app/s#path=lfrfid/'+keyName+'.rfid&Filetype=Flipper+RFID+key&Version=1&Key+type='+keyType+'&Data='+kd1+'+'+kd2+'+'+kd3+'" target="_blank">'+keyName+'.rfid</a>';
   return returnUrl;
 }
 
